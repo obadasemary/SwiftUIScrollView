@@ -10,9 +10,22 @@ import SwiftUI
 
 struct CardView: View {
     var body: some View {
-        Image("swiftui-button")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
+        VStack {
+
+            Image("swiftui-button")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .padding()
+            VStack(alignment: .leading) {
+                Text("SwiftUI")
+                
+                Text("Drawing a Border with Rounded Corners")
+                    .font(.system(.largeTitle))
+                    .bold()
+                Text("WRITTEN  BY OBADA")
+            }
+            .padding()
+        }
     }
 }
 
