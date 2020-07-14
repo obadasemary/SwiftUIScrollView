@@ -1,0 +1,80 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+PRODUCE_APP_IDENTIFIER = "com.vngrs.SwiftUIScrollView.demo"
+
+default_platform(:ios)
+
+platform :ios do
+
+  lane :certs_all do
+
+    certs_dev
+    certs_beta
+    certs_appstore
+  end
+
+  desc "Fetches the provisioning profiles so you can build locally and deploy to your device"
+  lane :certs_dev do
+
+    match(
+      app_identifier: "com.vngrs.SwiftUIScrollView.demo",
+      type: "development",
+      force_for_new_devices: true,
+      readonly: true
+    )
+  end
+
+  desc "Fetches the provisioning profiles so you can build for beta or appstore distribution"
+  lane :certs_beta do
+
+    match(
+      app_identifier: "com.vngrs.SwiftUIScrollView.demo",
+      type: "adhoc",
+      force_for_new_devices: true,
+      readonly: true
+    )
+  end
+
+  desc "AppStore signing"
+  lane :certs_appstore do
+
+    match(
+      app_identifier: "com.vngrs.SwiftUIScrollView.demo",
+      type: "appstore",
+      readonly: true
+    )
+  end
+
+  lane :build do
+
+    build_app(
+      scheme: "SwiftUIScrollView"
+    )
+  end
+
+  lane :register_new_devices do
+
+    register_devices(devices_file: "./devices.txt")
+    # register_devices(
+    #   devices: {
+    #     "Obada's iPhone 6" => "311e160f0e45a353eee276a000a90c72b342c2f1",
+    #     "Test iPhone 7 Plus" => "47967909d0b90df7d3444d2bbb8b44233475eba5",
+    #     "Ahmed Abdurrahman" => "00008020-001A0C381ED8003A",
+    #   }
+    # )
+    certs_all
+  end
+end

@@ -1,0 +1,54 @@
+fastlane documentation
+================
+# Installation
+
+Make sure you have the latest version of the Xcode command line tools installed:
+
+```
+xcode-select --install
+```
+
+Install _fastlane_ using
+```
+[sudo] gem install fastlane -NV
+```
+or alternatively using `brew install fastlane`
+
+# Available Actions
+## iOS
+### ios certs_all
+```
+fastlane ios certs_all
+```
+
+### ios certs_dev
+```
+fastlane ios certs_dev
+```
+Fetches the provisioning profiles so you can build locally and deploy to your device
+### ios certs_beta
+```
+fastlane ios certs_beta
+```
+Fetches the provisioning profiles so you can build for beta or appstore distribution
+### ios certs_appstore
+```
+fastlane ios certs_appstore
+```
+AppStore signing
+### ios build
+```
+fastlane ios build
+```
+
+### ios register_new_devices
+```
+fastlane ios register_new_devices
+```
+
+
+----
+
+This README.md is auto-generated and will be re-generated every time [fastlane](https://fastlane.tools) is run.
+More information about fastlane can be found on [fastlane.tools](https://fastlane.tools).
+The documentation of fastlane can be found on [docs.fastlane.tools](https://docs.fastlane.tools).
