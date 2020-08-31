@@ -14,6 +14,8 @@ struct CardView: View {
     var category: String
     var heading: String
     var author: String
+    var rating: Int
+    var excerpt: String
 
     var body: some View {
         VStack {
@@ -39,7 +41,22 @@ struct CardView: View {
 
                 Spacer()
             }
-            .padding()
+            .padding([.horizontal, .top])
+            
+            Group {
+                HStack(spacing: 3) {
+                    ForEach(1...(rating), id: \.self) { _ in
+                        Image(systemName: "star.fill")
+                            .font(.caption)
+                            .foregroundColor(.yellow)
+                    }
+                }
+                
+                Text(excerpt)
+                    .font(.system(.body, design: .rounded))
+                    .foregroundColor(.secondary)
+            }
+            .padding([.horizontal, .bottom])
         }
         .cornerRadius(10)
         .overlay(
@@ -52,6 +69,16 @@ struct CardView: View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(image: "swiftui-button", category: "SwiftUI", heading: "Drawing a Border with Rounded Corners", author: "Abdelrahman Mohamed")
+        CardView(image: "swiftui-button", category: "SwiftUI", heading: "Drawing a Border with Rounded Corners", author: "Abdelrahman Mohamed", rating: 4, excerpt: "With SwiftUI, you can easily draw a border around a button or text (and it actually works for all views) using the border modifier.")
     }
 }
+
+#if DEBUG
+
+let cardViews = [
+            CardView(image: "swiftui-button", category: "SwiftUI", heading: "Drawing a Border with Rounded Corners", author: "Simon Ng", rating: 4, excerpt: "With SwiftUI, you can easily draw a border around a button or text (and it actually works for all views) using the border modifier."),
+            CardView(image: "macos-programming", category: "macOS", heading: "Building a Simple Editing App", author: "Gabriel Theodoropoulos", rating: 5, excerpt: "Today we are going to focus on a commonly used family of controls which are vital to every application. Their primary purpose is to gather user input as well as to display certain message types to users. We are going to talk about text controls."),
+            CardView(image: "natural-language-api", category: "iOS", heading: "What's New in Natural Language API", author: "Sai Kambampati", rating: 5, excerpt: "2 years ago, at WWDC 2017, Apple released the Vision framework, an amazing, intuitive framework that would make it easy for developers to add computer vision to their apps.")
+    ]
+
+#endif
